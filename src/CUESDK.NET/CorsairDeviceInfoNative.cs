@@ -1,11 +1,13 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Corsair.CUE.SDK
 {
     /// <summary>
     /// Contains information about device.
     /// </summary>
-    public class CorsairDeviceInfo
+    [StructLayout(LayoutKind.Sequential)]
+    internal class CorsairDeviceInfoNative
     {
         /// <summary>
         /// Enum describing device type
@@ -15,7 +17,7 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// Null-terminated device model (like “K95RGB”)
         /// </summary>
-        public string model;
+        public IntPtr model;
 
         /// <summary>
         /// Enum describing physical layout of the keyboard or mouse. If device is neither keyboard nor mouse then value is CPL_Invalid
@@ -40,26 +42,11 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// Structure that describes channels of the DIY-devices and coolers.
         /// </summary>
-        public CorsairChannelsInfo channels;
+        public CorsairChannelsInfoNative channels;
 
         /// <summary>
-        /// The native channels info
+        /// null-terminated string that contains unique device identifier
         /// </summary>
-        internal CorsairDeviceInfoNative native;
-
-        /// <summary>
-        /// Creates a instance of CorsairDeviceInfo
-        /// </summary>
-        /// <param name="deviceInfoNative">The native device info</param>
-        internal CorsairDeviceInfo(CorsairDeviceInfoNative deviceInfoNative)
-        {
-            native = deviceInfoNative;
-            model = Marshal.PtrToStringAnsi(native.model);
-            physicalLayout = native.physicalLayout;
-            logicalLayout = native.logicalLayout;
-            capsMask = native.capsMask;
-            ledsCount = native.ledsCount;
-            channels = new CorsairChannelsInfo(native.channels);
-        }
+        public char[] deviceId;
     }
 }

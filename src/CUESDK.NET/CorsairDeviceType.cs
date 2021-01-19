@@ -53,6 +53,16 @@
         /// <summary>
         /// For coolers
         /// </summary>
-        CDT_Cooler = 9
+        CDT_Cooler = 9,
+
+        /// <summary>
+        /// For motherboards
+        /// </summary>
+        CDT_Motherboard = 10,
+
+        /// <summary>
+        /// For graphics cards
+        /// </summary>
+        CDT_GraphicsCard = 11
     }
 }

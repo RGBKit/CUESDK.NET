@@ -43,6 +43,21 @@
         /// <summary>
         /// For a pump
         /// </summary>
-        CCDT_Pump = 7
+        CCDT_Pump = 7,
+
+        /// <summary>
+        /// For a QL fan
+        /// </summary>
+        CCDT_QL_Fan = 8,
+
+        /// <summary>
+        /// For a water block
+        /// </summary>
+        CCDT_WaterBlock = 9,
+
+        /// <summary>
+        /// For a SP Pro fan
+        /// </summary>
+        CCDT_SPPRO_Fan = 10
     }
 }

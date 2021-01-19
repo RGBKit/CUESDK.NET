@@ -204,5 +204,29 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure.</returns>
         [DllImport("CUESDK.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool CorsairGetInt32PropertyValue(int deviceIndex, CorsairDevicePropertyId propertyId, IntPtr propertyValue);
+
+        /// <summary>
+        /// Registers a callback that will be called by SDK when some event happened.
+        /// </summary>
+        /// <param name="context">Contains value that was supplied by user in CorsairSubscribeForEvents call</param>
+        /// <param name="cEvent">Information about event, user can distinguish between events by reading event->id field</param>
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void CorsairEventHandler(IntPtr context, CorsairEvent cEvent);
+
+        /// <summary>
+        /// Registers a callback that will be called by SDK when some event happened
+        /// </summary>
+        /// <param name="onEvent">Callback that is called by SDK when key is pressed or released</param>
+        /// <param name="context">Arbitrary context that will be returned in callback call. Can be NULL.</param>
+        /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure</returns>
+        [DllImport("CUESDK.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool CorsairSubscribeForEvents(CorsairEventHandler onEvent, IntPtr context);
+
+        /// <summary>
+        /// Unregisters callback previously registered by CorsairSubscribeForEvents call.
+        /// </summary>
+        /// <returns>If successful</returns>
+        [DllImport("CUESDK.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool CorsairUnsubscribeFromEvents();
     }
 }
