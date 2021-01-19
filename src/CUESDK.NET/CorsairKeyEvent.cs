@@ -8,7 +8,7 @@
         /// <summary>
         /// Null-terminated string that contains unique device identifier.
         /// </summary>
-        public char[] deviceId;
+        public string deviceId;
 
         /// <summary>
         /// G or M key that was pressed/released.

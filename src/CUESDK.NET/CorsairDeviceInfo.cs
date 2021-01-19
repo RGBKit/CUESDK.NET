@@ -45,7 +45,7 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// null-terminated string that contains unique device identifier
         /// </summary>
-        internal char[] deviceId;
+        internal string deviceId;
 
         /// <summary>
         /// The native channels info

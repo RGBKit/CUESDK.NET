@@ -47,6 +47,7 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// null-terminated string that contains unique device identifier
         /// </summary>
-        public char[] deviceId;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string deviceId;
     }
 }

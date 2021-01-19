@@ -10,7 +10,7 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// Null-terminated string that contains unique device identifier
         /// </summary>
-        public char[] deviceId;
+        public string deviceId;
 
         /// <summary>
         /// True if connected, false if disconnected.

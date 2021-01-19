@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.361</Version>
+    <Version>3.0.361.1</Version>
     <Authors>AndrewBabbitt97</Authors>
     <Company>Corsair</Company>
     <Product>CUESDK</Product>

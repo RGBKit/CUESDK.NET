@@ -11,7 +11,8 @@ namespace Corsair.CUE.SDK
         /// <summary>
         /// Null-terminated string that contains unique device identifier.
         /// </summary>
-        public char[] deviceId;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string deviceId;
 
         /// <summary>
         /// G or M key that was pressed/released.
