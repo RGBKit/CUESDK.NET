@@ -7,7 +7,7 @@
     <Authors>AndrewBabbitt97</Authors>
     <Company>Corsair</Company>
     <Product>CUESDK</Product>
-    <PackageReleaseNotes>Fixed namespaces to be Corsair.CUE.SDK</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for net45</PackageReleaseNotes>
     <PackageTags>Corsair;AndrewBabbitt97;CUE;ICUE;SDK</PackageTags>
     <PackageId>CUESDK.NET</PackageId>
     <Description>Wrapper for the native CUESDK provided by Corsair</Description>
