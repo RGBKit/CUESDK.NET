@@ -36,7 +36,7 @@ namespace Corsair.CUE.SDK
 
             for (int i = 0; i < native.channelsCount; i++)
             {
-                var nativeChannelInfo = Marshal.PtrToStructure<CorsairChannelInfoNative>(native.channels + corsairChannelInfoSize * i);
+                var nativeChannelInfo = (CorsairChannelInfoNative)Marshal.PtrToStructure(native.channels + corsairChannelInfoSize * i, typeof(CorsairChannelInfoNative));
                 channels[i] = new CorsairChannelInfo(nativeChannelInfo);
             }
         }

@@ -17,7 +17,7 @@ namespace Corsair.CUE.SDK
         [Obsolete("It is not recommended to use this function with DIY-devices, coolers and memory modules. Consider using CorsairSetLedsColorsBufferByDeviceIndex() to fill buffer and CorsairSetLedsColorsFlushBuffer() to send data to CUE instead.")]
         public static bool CorsairSetLedsColors(int size, CorsairLedColor[] ledsColors)
         {
-            var corsairLedColorSize = Marshal.SizeOf<CorsairLedColorNative>();
+            var corsairLedColorSize = Marshal.SizeOf(typeof(CorsairLedColorNative));
             var ledsPtr = Marshal.AllocHGlobal(corsairLedColorSize * size);
 
             for (int i = 0; i < size; i++)
@@ -42,7 +42,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure. If there is no such ledId present in currently connected hardware (missing key in physical keyboard layout, or trying to control mouse while it’s disconnected) then functions completes successfully and returns true.</returns>
         public static bool CorsairSetLedsColorsBufferByDeviceIndex(int deviceIndex, int size, CorsairLedColor[] ledsColors)
         {
-            var corsairLedColorSize = Marshal.SizeOf<CorsairLedColorNative>();
+            var corsairLedColorSize = Marshal.SizeOf(typeof(CorsairLedColorNative));
             var ledsPtr = Marshal.AllocHGlobal(corsairLedColorSize * size);
 
             for (int i = 0; i < size; i++)
@@ -99,7 +99,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure. If there is no such ledId present in currently connected hardware (missing key in physical keyboard layout, or trying to control mouse while it’s disconnected) then functions completes successfully and returns true. Also ledsColors array will contain R, G and B values of colors on return.</returns>
         public static bool CorsairGetLedsColors(int size, CorsairLedColor[] ledsColors)
         {
-            var corsairLedColorSize = Marshal.SizeOf<CorsairLedColorNative>();
+            var corsairLedColorSize = Marshal.SizeOf(typeof(CorsairLedColorNative));
             var ledsPtr = Marshal.AllocHGlobal(corsairLedColorSize * size);
 
             for (int i = 0; i < size; i++)
@@ -112,7 +112,7 @@ namespace Corsair.CUE.SDK
 
             for (int i = 0; i < size; i++)
             {
-                ledsColors[i].native = Marshal.PtrToStructure<CorsairLedColorNative>(ledsPtr + corsairLedColorSize * i);
+                ledsColors[i].native = (CorsairLedColorNative)Marshal.PtrToStructure(ledsPtr + corsairLedColorSize * i, typeof(CorsairLedColorNative));
                 ledsColors[i].ApplyToManaged();
             }
 
@@ -130,7 +130,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure. If there is no such ledId present in currently connected hardware (missing key in physical keyboard layout, or trying to control mouse while it’s disconnected) then functions completes successfully and returns true. Also ledsColors array will contain R, G and B values of colors on return.</returns>
         public static bool CorsairGetLedsColorsByDeviceIndex(int deviceIndex, int size, CorsairLedColor[] ledsColors)
         {
-            var corsairLedColorSize = Marshal.SizeOf<CorsairLedColorNative>();
+            var corsairLedColorSize = Marshal.SizeOf(typeof(CorsairLedColorNative));
             var ledsPtr = Marshal.AllocHGlobal(corsairLedColorSize * size);
 
             for (int i = 0; i < size; i++)
@@ -143,7 +143,7 @@ namespace Corsair.CUE.SDK
 
             for (int i = 0; i < size; i++)
             {
-                ledsColors[i].native = Marshal.PtrToStructure<CorsairLedColorNative>(ledsPtr + corsairLedColorSize * i);
+                ledsColors[i].native = (CorsairLedColorNative)Marshal.PtrToStructure(ledsPtr + corsairLedColorSize * i, typeof(CorsairLedColorNative));
                 ledsColors[i].ApplyToManaged();
             }
 
@@ -176,7 +176,7 @@ namespace Corsair.CUE.SDK
                 callbackType?.Invoke(context, result, error);
             });
 
-            var corsairLedColorSize = Marshal.SizeOf<CorsairLedColorNative>();
+            var corsairLedColorSize = Marshal.SizeOf(typeof(CorsairLedColorNative));
             var ledsPtr = Marshal.AllocHGlobal(corsairLedColorSize * size);
 
             for (int i = 0; i < size; i++)
@@ -209,7 +209,7 @@ namespace Corsair.CUE.SDK
         public static CorsairDeviceInfo CorsairGetDeviceInfo(int deviceIndex)
         {
             var deviceInfoPtr = CUESDKNative.CorsairGetDeviceInfo(deviceIndex);
-            var deviceInfo = Marshal.PtrToStructure<CorsairDeviceInfoNative>(deviceInfoPtr);
+            var deviceInfo = (CorsairDeviceInfoNative)Marshal.PtrToStructure(deviceInfoPtr, typeof(CorsairDeviceInfoNative));
 
             return new CorsairDeviceInfo(deviceInfo);
         }
@@ -221,7 +221,7 @@ namespace Corsair.CUE.SDK
         public static CorsairLedPositions CorsairGetLedPositions()
         {
             var ledPositionsPtr = CUESDKNative.CorsairGetLedPositions();
-            var ledPositions = Marshal.PtrToStructure<CorsairLedPositionsNative>(ledPositionsPtr);
+            var ledPositions = (CorsairLedPositionsNative)Marshal.PtrToStructure(ledPositionsPtr, typeof(CorsairLedPositionsNative));
 
             return new CorsairLedPositions(ledPositions);
         }
@@ -234,7 +234,7 @@ namespace Corsair.CUE.SDK
         public static CorsairLedPositions CorsairGetLedPositionsByDeviceIndex(int deviceIndex)
         {
             var ledPositionsPtr = CUESDKNative.CorsairGetLedPositionsByDeviceIndex(deviceIndex);
-            var ledPositions = Marshal.PtrToStructure<CorsairLedPositionsNative>(ledPositionsPtr);
+            var ledPositions = (CorsairLedPositionsNative)Marshal.PtrToStructure(ledPositionsPtr, typeof(CorsairLedPositionsNative));
 
             return new CorsairLedPositions(ledPositions);
         }
@@ -332,7 +332,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure.</returns>
         public static bool CorsairGetBoolPropertyValue(int deviceIndex, CorsairDevicePropertyId propertyId, ref bool propertyValue)
         {
-            var propertySize = Marshal.SizeOf<int>();
+            var propertySize = Marshal.SizeOf(typeof(int));
             var propertyPtr = Marshal.AllocHGlobal(propertySize);
 
             Marshal.WriteInt32(propertyPtr, Convert.ToInt32(propertyValue));
@@ -355,7 +355,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure.</returns>
         public static bool CorsairGetInt32PropertyValue(int deviceIndex, CorsairDevicePropertyId propertyId, ref int propertyValue)
         {
-            var propertySize = Marshal.SizeOf<int>();
+            var propertySize = Marshal.SizeOf(typeof(int));
             var propertyPtr = Marshal.AllocHGlobal(propertySize);
 
             Marshal.WriteInt32(propertyPtr, propertyValue);
@@ -385,7 +385,7 @@ namespace Corsair.CUE.SDK
         /// <returns>Boolean value. True if successful. Use CorsairGetLastError() to check the reason of failure</returns>
         public static bool CorsairSubscribeForEvents(CorsairEventHandler onEvent, IntPtr context)
         {
-            var callbackMethod = new CUESDKNative.CorsairEventHandler((IntPtr context, CorsairEvent cEvent) =>
+            var callbackMethod = new CUESDKNative.CorsairEventHandler((IntPtr ctx, CorsairEvent cEvent) =>
             {
                 onEvent?.Invoke(context, cEvent);
             });

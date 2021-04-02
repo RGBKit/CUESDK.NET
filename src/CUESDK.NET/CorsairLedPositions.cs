@@ -36,7 +36,7 @@ namespace Corsair.CUE.SDK
 
             for (int i = 0; i < native.numberOfLeds; i++)
             {
-                var nativeLedPosition = Marshal.PtrToStructure<CorsairLedPositionNative>(native.pLedPosition + corsairLedPositionSize * i);
+                var nativeLedPosition = (CorsairLedPositionNative)Marshal.PtrToStructure(native.pLedPosition + corsairLedPositionSize * i, typeof(CorsairLedPositionNative));
                 pLedPosition[i] = new CorsairLedPosition(nativeLedPosition);
             }
         }
